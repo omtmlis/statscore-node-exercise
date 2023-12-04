@@ -1,21 +1,6 @@
 import { Event, ParsedResult } from "../types";
 
 export class EventParser {
-  static formatScore(match: Event): string {
-    switch (match.sport) {
-      case "soccer":
-      case "handball":
-        return this.formatHandballOrSoccerScore(match.score as string);
-      case "tennis":
-      case "volleyball":
-        return this.formatTennisOrVolleyballScore(match.score as string);
-      case "basketball":
-        return this.formatBasketballScore(match.score as string[][]);
-      default:
-        throw new Error("Invalid sport");
-    }
-  }
-
   static parseEvents = (data: Event[]): ParsedResult[] => {
     return data
       .map((match) => {
@@ -31,6 +16,21 @@ export class EventParser {
       })
       .filter(Boolean) as ParsedResult[];
   };
+
+  static formatScore(match: Event): string {
+    switch (match.sport) {
+      case "soccer":
+      case "handball":
+        return this.formatHandballOrSoccerScore(match.score as string);
+      case "tennis":
+      case "volleyball":
+        return this.formatTennisOrVolleyballScore(match.score as string);
+      case "basketball":
+        return this.formatBasketballScore(match.score as string[][]);
+      default:
+        throw new Error("Invalid sport");
+    }
+  }
 
   private static formatHandballOrSoccerScore(matchScore: string): string {
     if (!this.isValidBasicScore(matchScore)) {
