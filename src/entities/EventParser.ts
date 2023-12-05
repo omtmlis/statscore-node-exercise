@@ -63,7 +63,7 @@ export class EventParser {
     if (
       !Array.isArray(matchScore) ||
       flatArr.length !== 4 ||
-      flatArr.every((quarterResult) => this.isValidBasicScore(quarterResult))
+      !flatArr.every((quarterResult) => this.isValidBasicScore(quarterResult))
     ) {
       throw new Error("Invalid score format");
     }
